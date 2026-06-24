@@ -1,0 +1,196 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="/static/style.css">
+<script>
+    document.addEventListener('wheel', function (e) {
+        if (e.ctrlKey) { e.preventDefault(); }
+    }, { passive: false });
+    document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && (e.key === '=' || e.key === '-')) { e.preventDefault(); }
+    });
+</script>
+<div class="bg-scroll">
+
+    <!-- SINGLE CENTER ROW -->
+    <div class="scroll-row center-row">
+        {% for i in range(1,41) %}
+        <img src="/static/posters/p{{i}}.jpg" decoding="async" loading="lazy">
+        {% endfor %}
+
+        {% for i in range(1,41) %}
+        <img src="/static/posters/p{{i}}.jpg" decoding="async" loading="lazy">
+        {% endfor %}
+    </div>
+    <script>
+        (function () {
+            const row = document.querySelector('.center-row');
+            if (row) {
+                let startTime = sessionStorage.getItem('bgScrollStartTime');
+                if (!startTime) {
+                    startTime = Date.now();
+                    sessionStorage.setItem('bgScrollStartTime', startTime);
+                }
+                const elapsedSeconds = (Date.now() - startTime) / 1000;
+                const duration = 35;
+                row.style.animationDelay = -(elapsedSeconds % duration) + 's';
+            }
+        })();
+    </script>
+
+</div>
+
+<div class="watermark">CREATED BY: <a href="https://instagram.com/rebeljayn" target="_blank"
+        style="text-decoration: none; color: inherit;">JAYN</a></div>
+
+<div class="auth-container">
+    <div class="auth-card reg-card">
+        <h1 class="reg-h1">Create Account</h1>
+
+        <form method="POST" class="reg-form">
+            <input type="text" name="first_name" placeholder="First name" required>
+            <input type="text" name="last_name" placeholder="Last name" required>
+
+            <input type="email" name="email" placeholder="name@example.com" required>
+
+            <!-- Custom searchable dropdown for Country -->
+            <div class="csdrop" data-name="country">
+                <input type="hidden" name="country" required>
+                <input type="text" class="csdrop-display" placeholder="Country/Region" autocomplete="off">
+                <div class="csdrop-menu">
+                    <ul class="csdrop-list">
+                        {% for c in countries %}
+                        <li data-val="{{ c }}">{{ c }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+            <div class="phone-group">
+                <!-- Custom searchable dropdown for Phone code -->
+                <div class="csdrop" data-name="phone_country">
+                    <input type="hidden" name="phone_country" value="+91" required>
+                    <input type="text" class="csdrop-display" placeholder="Code" value="+91" autocomplete="off">
+                    <div class="csdrop-menu">
+                        <ul class="csdrop-list">
+                            {% for p in phones %}
+                            <li data-val="{{ p.split(' ')[0] }}">{{ p.split(' ')[0] }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <input type="text" name="phone" placeholder="Phone number" required>
+            </div>
+
+            <div class="dob-group">
+                <!-- Custom searchable dropdowns for DOB -->
+                <div class="csdrop" data-name="day">
+                    <input type="hidden" name="day" required>
+                    <input type="text" class="csdrop-display" placeholder="Day" autocomplete="off">
+                    <div class="csdrop-menu">
+                        <ul class="csdrop-list">
+                            {% for d in range(1, 32) %}
+                            <li data-val="{{ d }}">{{ d }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="csdrop" data-name="month">
+                    <input type="hidden" name="month" required>
+                    <input type="text" class="csdrop-display" placeholder="Month" autocomplete="off">
+                    <div class="csdrop-menu">
+                        <ul class="csdrop-list">
+                            {% for m in months %}
+                            <li data-val="{{ m }}">{{ m }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="csdrop" data-name="year">
+                    <input type="hidden" name="year" required>
+                    <input type="text" class="csdrop-display" placeholder="Year" autocomplete="off">
+                    <div class="csdrop-menu">
+                        <ul class="csdrop-list">
+                            {% for y in range(1900, 2027)|reverse %}
+                            <li data-val="{{ y }}">{{ y }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            {% if error == 'exists' %}
+            <div class="error-msg2 shake">USER EXISTS</div>
+            {% endif %}
+
+            <button type="submit" class="reg-btn">Register</button>
+        </form>
+
+        <p class="reg-subtitle">Already have an account? <a href="/">Login↗</a></p>
+    </div>
+</div>
+
+<script>
+    (function () {
+        document.querySelectorAll('.csdrop').forEach(function (drop) {
+            const display = drop.querySelector('.csdrop-display');
+            const menu = drop.querySelector('.csdrop-menu');
+            const list = drop.querySelector('.csdrop-list');
+            const hidden = drop.querySelector('input[type="hidden"]');
+
+            display.addEventListener('click', function (e) {
+                e.stopPropagation();
+                document.querySelectorAll('.csdrop-menu.open').forEach(m => m.classList.remove('open'));
+                menu.classList.add('open');
+                display.focus();
+                filterList(display.value);
+            });
+
+            display.addEventListener('input', function () {
+                menu.classList.add('open');
+                filterList(this.value);
+                // Sync hidden value loosely, precise on click
+                hidden.value = this.value;
+            });
+
+            function filterList(q) {
+                Array.from(list.children).forEach(function (li) {
+                    const match = li.textContent.toLowerCase().includes(q.toLowerCase());
+                    li.style.display = match ? '' : 'none';
+                });
+            }
+
+            list.addEventListener('click', function (e) {
+                if (e.target.tagName === 'LI') {
+                    const val = e.target.dataset.val;
+                    hidden.value = val;
+                    display.value = val;
+                    menu.classList.remove('open');
+                }
+            });
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.classList.contains('csdrop-display')) {
+                document.querySelectorAll('.csdrop-menu.open').forEach(m => m.classList.remove('open'));
+            }
+        });
+
+        const phoneInput = document.querySelector('input[name="phone"]');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^\d]/g, '').substring(0, 15);
+            });
+        }
+
+        const phoneCountryInput = document.querySelector('.csdrop[data-name="phone_country"] .csdrop-display');
+        if (phoneCountryInput) {
+            phoneCountryInput.addEventListener('input', function () {
+                this.value = this.value.replace(/[^\d+]/g, '').substring(0, 5);
+                const hidden = this.parentElement.querySelector('input[type="hidden"]');
+                hidden.value = this.value;
+            });
+        }
+    })();
+</script>

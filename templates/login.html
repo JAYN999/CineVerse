@@ -1,0 +1,65 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="/static/style.css">
+<script>
+    document.addEventListener('wheel', function (e) {
+        if (e.ctrlKey) { e.preventDefault(); }
+    }, { passive: false });
+    document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && (e.key === '=' || e.key === '-')) { e.preventDefault(); }
+    });
+</script>
+<div class="bg-scroll">
+
+    <!-- SINGLE CENTER ROW -->
+    <div class="scroll-row center-row">
+        {% for i in range(1,41) %}
+        <img src="/static/posters/p{{i}}.jpg" decoding="async" loading="lazy">
+        {% endfor %}
+
+        {% for i in range(1,41) %}
+        <img src="/static/posters/p{{i}}.jpg" decoding="async" loading="lazy">
+        {% endfor %}
+    </div>
+    <script>
+        (function () {
+            const row = document.querySelector('.center-row');
+            if (row) {
+                let startTime = sessionStorage.getItem('bgScrollStartTime');
+                if (!startTime) {
+                    startTime = Date.now();
+                    sessionStorage.setItem('bgScrollStartTime', startTime);
+                }
+                const elapsedSeconds = (Date.now() - startTime) / 1000;
+                const duration = 35;
+                row.style.animationDelay = -(elapsedSeconds % duration) + 's';
+            }
+        })();
+    </script>
+
+</div>
+
+<div class="watermark">CREATED BY: <a href="https://instagram.com/rebeljayn" target="_blank"
+        style="text-decoration: none; color: inherit;">JAYN</a></div>
+
+<div class="auth-container">
+    <div class="auth-card dark login-card">
+        <h1>CineVerse</h1>
+        <p class="subtitle">Welcome back</p>
+
+        <form method="POST">
+            <input type="email" name="email" class="email" placeholder="Email" required>
+            <input type="password" name="password" class="password" placeholder="Password" required>
+            
+            {% if error == 'invalid' %}
+            <div class="error-msg1 shake">PASSWORD WRONG</div>
+            {% endif %}
+
+            <button>Login</button>
+        </form>
+
+        <p class="switch">
+            Don't have an account?
+            <a class="log-subtitle" href="/register">Register↗</a>
+        </p>
+    </div>
+</div>

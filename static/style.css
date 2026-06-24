@@ -1,0 +1,972 @@
+@font-face {
+    font-family: "inversionz";
+    src: url("/static/fonts/Inversionz_Unboxed.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "SFPRODISPLAYBOLD";
+    src: url("/static/fonts/sf-pro-display/SFPRODISPLAYBOLD.OTF") format("opentype");
+}
+
+body {
+    margin: 0;
+    font-family: "inversionz";
+    background: #1c1c1c;
+    color: white;
+
+    /* Native App Feel: Prevent ugly blue text highlighting */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: default;
+}
+
+button,
+input,
+select,
+textarea,
+a,
+label,
+li {
+    /* Ensure all links and buttons get the clicking hand cursor */
+    cursor: pointer;
+    font-family: "inversionz" !important;
+}
+
+::placeholder {
+    font-family: "inversionz" !important;
+}
+
+/* ================= HOME ================= */
+.container {
+    width: 90%;
+    margin: 40px auto;
+    text-align: center;
+    background: transparent;
+    padding: 30px;
+    border-radius: 15px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ================= SEARCH ================= */
+.search-box {
+    position: relative;
+    width: 100%;
+    height: 120px;
+}
+
+.search-wrapper {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%) scale(2.0);
+    color: rgba(255, 255, 255, 0.433);
+    width: 650px;
+}
+
+.search-wrapper input {
+    width: 100%;
+    height: 45px;
+    padding: 0 50px 0 25px;
+    border-radius: 70px;
+    border: 1.3px solid black;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(12px);
+    box-shadow: 1px 1px 1.4px 1.4px rgba(0, 0, 0, 0.24);
+    color: black;
+    font-size: 22px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.search-wrapper input:focus {
+    border-color: black;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.search-wrapper input::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.search-btn {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.search-btn:hover {
+    transform: translateY(-50%) scale(1.5);
+}
+
+.search-btn svg {
+    stroke: black;
+}
+
+/* ================= MOVIES ================= */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 60px;
+    margin-top: 250px;
+    padding-bottom: 100px;
+}
+
+.movie-card {
+    display: block;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    color: white;
+    padding-bottom: 25px;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 670px;
+    object-fit: cover;
+}
+
+.movie-info {
+    padding: 20px;
+}
+
+.movie-info h3 {
+    font-family: "inversionz";
+    font-size: 40px;
+    margin: 15px 0 5px 0;
+    font-weight: normal;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.movie-info p {
+    font-family: "inversionz";
+    font-size: 25px;
+    margin: 5px 0 10px 0;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 2px;
+}
+
+.movie-info .rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "inversionz";
+}
+
+/* ================= REVIEW PAGE ================= */
+.review-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+    padding: 50px;
+
+    width: 95%;
+    height: calc(100vh - 180px);
+    margin: 150px auto 30px auto;
+
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 60px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 10;
+    color: white;
+    box-sizing: border-box;
+}
+
+.movie-preview,
+.review-box {
+    text-align: center;
+    flex: 1;
+    max-width: 500px;
+}
+
+.movie-preview img {
+    width: 550px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+}
+
+.review-box h2 {
+    font-family: "inversionz";
+    font-size: 50px;
+    margin-bottom: 30px;
+    color: white;
+    -webkit-text-stroke: 0;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+    letter-spacing: 2px;
+}
+
+.preview-title {
+    font-family: "inversionz" !important;
+    font-size: 75px !important;
+    margin: 30px 0 10px 0 !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.movie-preview p {
+    font-family: "inversionz";
+    font-size: 40px;
+    margin: 10px 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.movie-preview .rating {
+    font-family: "inversionz";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.movie-preview .plot {
+    font-family: "inversionz";
+    font-size: 30px;
+    opacity: 0.9;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+/* INTERACTIVE HALF-STAR RATING */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 30px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    cursor: pointer;
+    width: 30px;
+    height: 60px;
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    /* Default Blank Star (Gray outline) */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>');
+}
+
+.star-rating label.full {
+    background-position: right;
+}
+
+.star-rating label.half {
+    background-position: left;
+}
+
+.star-rating input:checked~label,
+.star-rating label:hover,
+.star-rating label:hover~label {
+    /* Gold Star (Filled) */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="%23f5c518"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>');
+}
+
+.review-box textarea,
+.review-box input {
+    width: 100%;
+    height: 40px;
+    padding: 0 15px;
+    border-radius: 70px;
+    border: 1.3px solid black;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(12px);
+    box-shadow: 1px 1px 1.4px 1.4px rgba(0, 0, 0, 0.24);
+    color: black;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 20px;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+.review-box textarea {
+    height: 120px;
+    padding: 15px;
+    border-radius: 20px;
+    resize: none;
+}
+
+.review-box input:focus,
+.review-box textarea:focus {
+    border-color: black;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.review-box input::placeholder,
+.review-box textarea::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.review-box button {
+    width: 150px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1.3px solid black;
+    border-radius: 70px;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 1px 1px 1.4px 1.4px rgba(0, 0, 0, 0.24);
+    transition: 0.2s all;
+}
+
+.review-box button:hover {
+    background: white;
+    box-shadow: 0 0 7px white;
+}
+
+.review-back {
+    display: block;
+    margin-top: 30px;
+    color: #2997ff;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: "inversionz";
+    letter-spacing: 2px;
+}
+
+/* AUTH CONTAINER  */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ================= LOGIN CARD ================= */
+.login-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2.3);
+
+    width: 520px;
+    height: 440px;
+
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+
+    border-radius: 60px;
+    border: none;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+
+}
+
+
+/* ===== LOGIN POSITIONING ===== */
+
+.login-card h1 {
+    position: absolute;
+    font-family: "inversionz";
+    top: 0px;
+    left: 50px;
+    font-size: 75px;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 2px black;
+    paint-order: stroke fill;
+
+    animation: textShimmer 2.5s infinite linear;
+    text-shadow: 6px 6px 15px rgba(0, 0, 0, 1), 0px 0px 8px rgba(0, 0, 0, 0.9);
+}
+
+.login-card .subtitle {
+    position: absolute;
+    font-family: "inversionz";
+    font-size: 25px;
+    top: 90px;
+    left: 160px;
+}
+
+
+/* LOGIN INPUTS */
+.login-card input:nth-of-type(1) {
+    position: absolute;
+    font-size: 18px;
+    top: 170px;
+    left: 60px;
+    width: 400px;
+    height: 35px;
+    padding: 0 20px;
+    border-radius: 70px;
+    border: 0.26px solid black;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 1px 1.4px 1.4px rgba(0, 0, 0, 0.24);
+}
+
+.login-card input::placeholder {
+    color: black;
+}
+
+/* LOGIN PASSWORD */
+.login-card input:nth-of-type(2) {
+    position: absolute;
+    font-size: 18px;
+    top: 230px;
+    left: 60px;
+    width: 400px;
+    height: 35px;
+    padding: 0 20px;
+    border-radius: 70px;
+    border: 0.26px solid black;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 1px 1.4px 1.4px rgba(0, 0, 0, 0.24);
+}
+
+.login-card button {
+    grid-column: span 2;
+    justify-self: center;
+    width: 100px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    border: 1.3px solid black;
+    border-radius: 70px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s all;
+    position: absolute;
+    top: 320px;
+    left: 210px;
+    box-shadow: 1px 1px 1.4px 1.4px rgba(0, 0, 0, 0.24);
+}
+
+.login-card button:hover {
+    background: white;
+    box-shadow: 0 0 7px white;
+}
+
+.login-card .switch {
+    position: absolute;
+    font-family: "inversionz";
+    font-size: 20px;
+    bottom: 0px;
+    left: 120px;
+}
+
+.log-subtitle {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    color: #2997ff;
+    text-decoration: none;
+}
+
+.log-subtitle:visited,
+.log-subtitle:active {
+    color: #2997ff;
+}
+
+
+
+/* TOP BAR */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 140px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.8) 50%,
+            rgba(0, 0, 0, 0) 100%);
+    padding: 25px 50px;
+    z-index: 1000;
+}
+
+.title-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+}
+
+.top-bar .title {
+    font-family: "inversionz";
+    margin: 0;
+    font-size: 105px;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 2px black;
+    paint-order: stroke fill;
+    text-shadow: 6px 6px 15px rgba(0, 0, 0, 1), 0px 0px 8px rgba(0, 0, 0, 0.9);
+}
+
+.logout-btn {
+    margin-right: 50px;
+    font-family: "inversionz";
+    font-size: 36px;
+    color: white;
+    text-decoration: none;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+    letter-spacing: 1px;
+}
+
+.logout-btn:hover {
+    color: #ff0000;
+}
+
+/* BACKGROUND */
+.bg-scroll {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    background: black;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.bg-scroll.dimmed {
+    opacity: 0.15;
+}
+
+/* MAIN SCROLL ROW */
+.center-row {
+    display: flex;
+    width: max-content;
+    animation: scrollLeft 40s linear infinite;
+}
+
+/* POSTERS */
+.center-row img {
+    width: 810px;
+    height: 1200px;
+    margin: 15px;
+    border-radius: 12px;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    content-visibility: auto;
+    contain-intrinsic-size: 810px 1200px;
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* ================= WATERMARK ================= */
+.watermark {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    font-family: "inversionz";
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.4);
+    /* Dull out 'CREATED BY:' */
+    z-index: 1000;
+    letter-spacing: 1px;
+}
+
+.watermark-nav {
+    font-family: "inversionz";
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 1px;
+}
+
+.watermark-nav a,
+.watermark a {
+    color: transparent !important;
+    background: linear-gradient(90deg, #666 0%, #ffffff 50%, #666 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: textShimmer 2.5s infinite linear;
+    text-shadow: none;
+}
+
+@keyframes textShimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* ================= ANIMATIONS & ERRORS ================= */
+@keyframes dissolveIn {
+    0% {
+        opacity: 0;
+        filter: brightness(0);
+    }
+
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-15px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(15px);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+.shake {
+    animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+/* LOGIN ERROR */
+
+.error-msg1 {
+    position: absolute;
+    top: 285px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: "inversionz";
+    font-size: 25px;
+    color: rgb(255, 40, 40);
+    -webkit-text-stroke: 1.5px black;
+    paint-order: stroke fill;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+    letter-spacing: 2px;
+    animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both, fadeOut 10s forwards;
+}
+
+/* REGISTER ERROR */
+
+.error-msg2 {
+    grid-column: span 2;
+    text-align: center;
+    font-family: "inversionz";
+    font-size: 25px;
+    color: rgb(255, 40, 40);
+    -webkit-text-stroke: 1.5px black;
+    paint-order: stroke fill;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+    letter-spacing: 2px;
+    margin-bottom: -10px;
+    animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both, fadeOut 10s forwards;
+}
+
+/* ================= REGISTER ================= */
+
+.auth-card {
+    animation: dissolveIn 0.8s ease-out forwards;
+}
+
+.reg-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2.3);
+
+    width: auto;
+    height: auto;
+    padding: 20px 40px 20px 40px;
+
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(12px);
+    border-radius: 60px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reg-h1 {
+    font-family: "inversionz";
+    font-size: 70px;
+    margin: 5px 0 0 0;
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    -webkit-text-stroke: 2px black;
+    paint-order: stroke fill;
+    text-shadow: 6px 6px 15px rgba(0, 0, 0, 1), 0px 0px 8px rgba(0, 0, 0, 0.9);
+}
+
+.reg-subtitle {
+    font-family: "inversionz";
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    color: white;
+    text-align: center;
+}
+
+.reg-subtitle a {
+    color: #2997ff;
+    text-decoration: none;
+}
+
+.reg-subtitle a:visited,
+.reg-subtitle a:active {
+    color: #2997ff;
+}
+
+/* Grid Auto-Layout */
+.reg-form {
+    font-size: 18px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 310px 310px;
+    column-gap: 40px;
+    row-gap: 20px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* ========= Register Input fields =========== */
+.reg-form input,
+.reg-form select {
+    font-size: 18px;
+    width: 310px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1.3px solid black;
+    border-radius: 70px;
+    padding: 0 15px;
+    color: black;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    box-shadow: 1px 1px 1.4px 1.4px rgba(0, 0, 0, 0.24);
+}
+
+.reg-form input:focus,
+.reg-form select:focus {
+    border-color: black;
+}
+
+.reg-form input::placeholder {
+    color: black;
+}
+
+.reg-form select option {
+    background: #1c1c1c;
+    color: white;
+    font-size: 16px;
+}
+
+/* Groups */
+.phone-group {
+    font-size: 18px;
+    display: flex;
+    gap: 10px;
+    width: 310px;
+}
+
+
+/* ===== Custom Searchable Dropdown (.csdrop) ===== */
+.csdrop {
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* The visible pill that looks like the other inputs */
+.csdrop-display {
+    width: 100% !important;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1.3px solid black;
+    border-radius: 70px;
+    padding: 0 15px;
+    color: black;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 1.4px 1.4px rgba(0, 0, 0, 0.24);
+    white-space: nowrap;
+    overflow: hidden;
+    user-select: none;
+}
+
+.csdrop-display:not(.selected) {
+    color: rgba(0, 0, 0, 0.55);
+    /* placeholder grey */
+}
+
+/* The dropdown menu */
+.csdrop-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.csdrop-menu.open {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Search bar inside dropdown */
+.csdrop-search {
+    width: 100%;
+    padding: 8px 12px;
+    background: #222;
+    border: none;
+    border-bottom: 1px solid #333;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.csdrop-search::placeholder {
+    color: #888;
+}
+
+/* The scrollable list */
+.csdrop-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 180px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #333 #000;
+}
+
+.csdrop-list::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbars as requested */
+}
+
+.csdrop-list {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.csdrop-list li {
+    padding: 6px 15px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.csdrop-list li:hover {
+    background: #2997ff;
+    color: white;
+}
+
+/* Phone group: phone code csdrop is narrow */
+.phone-group .csdrop {
+    width: 80px;
+    flex: none;
+    min-width: 0;
+}
+
+/* DOB group: three equal csdrops */
+.dob-group .csdrop {
+    flex: 1;
+    min-width: 0;
+    width: 0;
+}
+
+.dob-group {
+    display: flex;
+    gap: 10px;
+    width: 310px;
+}
+
+/*Register button*/
+.reg-btn {
+    grid-column: span 2;
+    justify-self: center;
+    width: 120px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    border: 1.3px solid black;
+    border-radius: 70px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s all;
+    margin-top: 10px;
+    box-shadow: 1px 1px 1.4px 1.4px rgba(0, 0, 0, 0.24);
+}
+
+.reg-btn:hover {
+    background: white;
+    box-shadow: 0 0 7px white;
+}
+
+.auth-card {
+    animation: dissolveIn 0.8s ease-out forwards;
+}

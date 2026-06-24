@@ -1,0 +1,73 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="/static/style.css">
+<script>
+    document.addEventListener('wheel', function (e) {
+        if (e.ctrlKey) { e.preventDefault(); }
+    }, { passive: false });
+    document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && (e.key === '=' || e.key === '-')) { e.preventDefault(); }
+    });
+</script>
+
+<div class="bg-scroll {% if movies %}dimmed{% endif %}">
+    <!-- SINGLE CENTER ROW -->
+    <div class="scroll-row center-row">
+        {% for i in range(1,41) %}
+        <img src="/static/posters/p{{i}}.jpg" decoding="async" loading="lazy">
+        {% endfor %}
+
+        {% for i in range(1,41) %}
+        <img src="/static/posters/p{{i}}.jpg" decoding="async" loading="lazy">
+        {% endfor %}
+    </div>
+    <script>
+        (function () {
+            const row = document.querySelector('.center-row');
+            if (row) {
+                let startTime = sessionStorage.getItem('bgScrollStartTime');
+                if (!startTime) {
+                    startTime = Date.now();
+                    sessionStorage.setItem('bgScrollStartTime', startTime);
+                }
+                const elapsedSeconds = (Date.now() - startTime) / 1000;
+                const duration = 35;
+                row.style.animationDelay = -(elapsedSeconds % duration) + 's';
+            }
+        })();
+    </script>
+</div>
+
+
+
+<div class="container">
+    
+ <form method="POST" class="search-box">
+    <div class="search-wrapper">
+        <input name="movie" placeholder="Search movies..." required>
+        <button type="submit" class="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+    </div>
+</form>
+
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <a href="/add_review?title={{ movie.Title }}&poster={{ movie.Poster }}&year={{ movie.Year }}&plot={{ movie.Plot }}&genre={{ movie.Genre }}&imdb={{ movie.imdbRating }}" class="movie-card">
+            <img src="{{ movie.Poster }}">
+            <div class="movie-info">
+                <h3>{{ movie.Title }}</h3>
+                <p>{{ movie.Year }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    <div class="top-bar">
+        <div class="title-wrapper">
+            <h1 class="title"> CineVerse</h1>
+            <div class="watermark-nav">CREATED BY: <a href="https://instagram.com/rebeljayn" target="_blank"
+            style="text-decoration: none; color: inherit;">JAYN</a></div>
+        </div>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+</div>
