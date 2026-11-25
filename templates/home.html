@@ -50,9 +50,13 @@
     </div>
 </form>
 
+    {% if error %}
+    <p class="error-msg1" role="alert">{{ error }}</p>
+    {% endif %}
+
     <div class="movie-grid">
         {% for movie in movies %}
-        <a href="/add_review?title={{ movie.Title }}&poster={{ movie.Poster }}&year={{ movie.Year }}&plot={{ movie.Plot }}&genre={{ movie.Genre }}&imdb={{ movie.imdbRating }}" class="movie-card">
+        <a href="{{ url_for('add_review', title=movie.Title, poster=movie.Poster, year=movie.Year, plot=movie.Plot, genre=movie.Genre, imdb=movie.imdbRating) }}" class="movie-card">
             <img src="{{ movie.Poster }}">
             <div class="movie-info">
                 <h3>{{ movie.Title }}</h3>
