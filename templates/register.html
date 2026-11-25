@@ -122,6 +122,12 @@
 
             {% if error == 'exists' %}
             <div class="error-msg2 shake">USER EXISTS</div>
+            {% elif error == 'mismatch' %}
+            <div class="error-msg2 shake">PASSWORDS DO NOT MATCH</div>
+            {% elif error == 'weak' %}
+            <div class="error-msg2 shake">PASSWORD MUST BE AT LEAST 8 CHARACTERS</div>
+            {% elif error == 'required' %}
+            <div class="error-msg2 shake">EMAIL AND PASSWORD ARE REQUIRED</div>
             {% endif %}
 
             <button type="submit" class="reg-btn">Register</button>
